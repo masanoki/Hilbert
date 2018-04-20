@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     private Button decButton, incButton;
     private final static int MAX_ORDER = 9;
     private int order = 1;
+    private final static String KEY_NAME = "MainActivity.name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,21 @@ public class MainActivity extends AppCompatActivity {
                 display();
             }
         });
+
+        if (savedInstanceState != null)
+            order = savedInstanceState.getInt(KEY_NAME);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         display();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_NAME, order);
     }
 
     private void display() {
