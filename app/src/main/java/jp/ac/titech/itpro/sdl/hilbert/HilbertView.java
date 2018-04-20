@@ -43,9 +43,11 @@ public class HilbertView extends View {
         paint.setStrokeWidth(3);
         int size = w < h ? w : h;
         double step = (double) size / (1 << order);
-        turtle.setPos((w - size + step) / 2, (h + size - step) / 2);
+        turtle.setPos((w - size + step) / 2, (h + size - step) / 2, (w + size - step) / 2);
         turtle.setDir(HilbertTurtle.E);
-        turtle.draw(order, step, HilbertTurtle.R);
+        MultiThread mt = new MultiThread(order, step, HilbertTurtle.R, turtle);
+        turtle.run(order, step, HilbertTurtle.R, 0);
+        mt.run();
     }
 
     private int order = 1;
